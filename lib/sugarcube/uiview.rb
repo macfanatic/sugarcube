@@ -232,7 +232,14 @@ class UIView
     right = origin + offset
 
     animation = CAKeyframeAnimation.animationWithKeyPath(keypath)
-    animation.duration = duration
+
+    #
+    # We had an issue compiling this due to a undefined CFTimeInterval
+    # class for some reason when this was included with the MessageUI framework
+    #
+    # https://github.com/rubymotion/sugarcube/issues/19
+    #
+    # animation.duration = duration
     animation.repeatCount = repeat
     animation.values = [origin, left, right, origin]
     animation.keyTimes = [0, 0.25, 0.75, 1.0]
